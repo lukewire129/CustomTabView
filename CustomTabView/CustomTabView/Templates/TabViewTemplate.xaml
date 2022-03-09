@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:ext="http://xamarin.com/schemas/2020/toolkit">
+    <Style x:Key="TabIViewTemplate" TargetType="ext:TabView">
+        <Setter Property="TabStripPlacement" Value="Bottom"/>
+        <Setter Property="TabStripHeight" Value="50"/>
+        <Setter Property="IsTabStop" Value="True"/>
+        <Setter Property="IsTabTransitionEnabled" Value="True"/>
+        <Setter Property="TabStripBackgroundColor" Value="#212429"/>
+        <Setter Property="TabIndicatorView">
+            <Setter.Value>
+                <Grid Scale="1.5" TranslationY="-5">
+                    <Frame BackgroundColor="Red" CornerRadius="20" VerticalOptions="Center" HorizontalOptions="Center"/>
+                </Grid>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TabIndicatorHeight" Value="50"/>
+        <Setter Property="TabIndicatorWidth" Value="40"/>
+    </Style>
+    <ControlTemplate x:Key="TabItemTemplate">
+        <Grid WidthRequest="60" HeightRequest="60" HorizontalOptions="Center" VerticalOptions="Center"
+			        RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Image x:Name="imgData"
+				        Grid.Row="0"
+				        VerticalOptions="Center"
+				        HorizontalOptions="Center"
+                        Aspect="AspectFill"
+                        Margin="10"
+                       TranslationY="5"
+				        Source="{TemplateBinding CurrentIcon}">
+                <Image.Triggers>
+                    <DataTrigger TargetType="Image" Binding="{TemplateBinding IsSelected}" Value="true">
+                        <Setter Property="TranslationY" Value="0"/>
+                    </DataTrigger>
+                </Image.Triggers>
+            </Image>
+            <Label x:Name="txtData"
+				        Grid.Row="1"
+				        HorizontalOptions="Center"
+				        FontSize="{TemplateBinding FontSize}"
+				        Text="{TemplateBinding Text}"
+				        TextColor="{TemplateBinding CurrentTextColor}">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{TemplateBinding IsSelected}" Value="true">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+        </Grid>
+    </ControlTemplate>
+</ResourceDictionary>
